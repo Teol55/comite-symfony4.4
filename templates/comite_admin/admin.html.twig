@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('admin') }}
+{% endblock %}
+{% block body %}
+    <div class="container">
+    <div class="row head__title justify-content-center">
+
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="{{ path('app_homepage') }}">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">A propos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Services</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+        </ul></div>
+
+    <div class="row body__admin">
+        <div class=" col-2 body__left">
+            <div id="accordeon">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">CSE Batttants</h4>
+                    </div>
+                    <div class="card-header">
+                        <a href="#article" class="card-link" data-toggle="collapse" data-parent="#accordeon">Articles</a>
+                    </div>
+                    <div class="collapse" id="article">
+                        <div class="list-group">
+                            <a class="list-group-item" href="{{ path('admin_article_new') }}"><span class="fa fa-newspaper-o"></span>Nouveau</a>
+                            <a class="list-group-item" href="{{ path('admin_article_list') }}"><span class="fa fa-pencil"></span> liste</a>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <a href="#billet" class="card-link" data-toggle="collapse" data-parent="#accordeon">Billets</a>
+                    </div>
+                    <div class="collapse" id="billet">
+                        <div class="list-group">
+                            <a class="list-group-item" href="{{ path('admin_ticket_new') }}"><span class="fa fa-newspaper-o"></span>Nouveau</a>
+                            <a class="list-group-item" href="{{ path('admin_ticket_list') }}"><span class="fa fa-pencil"></span> liste</a>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <a href="#tool" class="card-link" data-toggle="collapse" data-parent="#accordeon">Matériels</a>
+                    </div>
+                    <div class="collapse" id="tool">
+                        <div class="list-group">
+                            <a class="list-group-item" href="{{ path('admin_tool_new') }}"><span class="fa fa-newspaper-o"></span>Nouveau</a>
+                            <a class="list-group-item" href="{{ path('admin_tool_list') }}"><span class="fa fa-pencil"></span> liste</a>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <a href="#users" class="card-link" data-toggle="collapse" data-parent="#accordeon">Utilisateurs</a>
+                    </div>
+                    <div class="collapse" id="users">
+                        <div class="list-group">
+                            <a class="list-group-item" href="{{ path('admin_user_new') }}"><span class="fa fa-newspaper-o"></span>Nouveau</a>
+                            <a class="list-group-item" href="{{ path('admin_user_list') }}"><span class="fa fa-pencil"></span> liste</a>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <a href="#pv" class="card-link" data-toggle="collapse" data-parent="#accordeon">PVs de réunions</a>
+                    </div>
+                    <div class="collapse" id="pv">
+                        <div class="list-group">
+                            <a class="list-group-item" href="{{ path('admin_pvcse_new') }}"><span class="fa fa-newspaper-o"></span>Nouveau</a>
+                            <a class="list-group-item" href="{{ path('admin_pvcse_list') }}"><span class="fa fa-pencil"></span> liste</a>
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <a href="#partnair" class="card-link" data-toggle="collapse" data-parent="#accordeon">Nos Partenaires</a>
+                    </div>
+                    <div class="collapse" id="partnair">
+                        <div class="list-group">
+                            <a class="list-group-item" href="{{ path('admin_partner_new') }}"><span class="fa fa-newspaper-o"></span>Nouveau</a>
+                            <a class="list-group-item" href="{{ path('admin_partner_list') }}"><span class="fa fa-pencil"></span> liste</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+        </div>
+        <div class="col-lg-10 body__right   ">
+
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-danger">
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+                {% block content_body %}
+
+                {% endblock %}
+
+
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

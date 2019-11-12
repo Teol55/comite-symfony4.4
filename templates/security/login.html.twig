@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}CE Battants{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name = "google-signin-client_id" content = "654323288425-ospu1a36l7o0mlhv8vp5udd6t5fi0h09.apps.googleusercontent.com">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        {{ encore_entry_link_tags('login') }}
+    {% endblock %}
+</head>
+
+
+<body>
+
+<div class="particles-js" id="particles-js">
+    <div class="container">
+<div class="row justify-content-center">
+
+    <div class="justify-content-center login_part col-lg-3">  <h1>CSE ESSILOR BATTANTS</h1><br> <a class="btn btn-block btn-social btn-google" href="{{path('connect_google') }}"><span class="fa fa-google"></span>Connexion</a>
+    </br> {% for message in app.flashes('warning') %}
+            <div class="alert alert-warning">
+
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div></div>
+    </div></div>
+</body>
+{% block body %}
+
+
+
+
+
+
+
+{% endblock %}
+{% block javascripts %}
+
+    {{ encore_entry_script_tags('login') }}
+    {{ encore_entry_script_tags('app') }}
+
+
+{% endblock %}
+</body>
+</html>

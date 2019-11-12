@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HOMEPAGE!{% endblock %}
+{% block header %}
+    {{ include('comite/header.html.twig') }}
+
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 recduction-img">
+
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    {% for article in articles %}
+                    <li data-target="#carouselExampleIndicators" data-slide-to="{{ loop.index }}" {% if loop.first %}class="active"{% endif %}></li>
+                    {% endfor %}
+                </ol>
+                <div class="carousel-inner">
+
+                    {% for article in articles %}
+                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                        <a href="{{ path('app_articles', {'slug': article.slug} )}}" ><img class="d-block w-100" src="{{ uploaded_asset(article.imagePath) }}" alt="Second slide"></a>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1>{{article.title}}</h1>
+
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+
+
+
+            </div>
+            <div class="col-lg-2 recduction-img"><a href="{{ path('app_partenaire') }}"><img class="img-fluid" src="{{ asset('build/images/ten-percent-off.png') }}"></a>
+            <a href="{{ path('app_partenaire') }}"><img class="img-fluid" src="{{ asset('build/images/team.png') }}"></a>
+            <a href="{{ path('app_tool') }}"><img class="img-fluid" src="{{ asset('build/images/tool.png') }}"></a></div>
+        </div>
+
+
+        <div class="row">
+              <div class="col-lg-4 homepage-img_bas"><a href="{{ path('app_billetterie') }}"><img class="img-thumbnail" src="{{ asset('build/images/tickets.jpg') }}"></a> <div class="carousel-caption d-none d-md-block">
+                    <h1>Billetterie</h1>
+
+                </div></div>
+
+
+            <div class="col-lg-4 homepage-img_bas"><a href="{{ path('app_PvCSE', {
+                    id: pvce.id
+                }) }}"><img class="img-thumbnail" src="{{ asset('build/images/pen.jpg') }}"></a><div class="carousel-caption d-none d-md-block">
+                    <h1>PV de CE</h1>
+
+                </div></div>
+            <div class="col-lg-4 homepage-img_bas"><a href="{{ path('app_contact') }}"><img class="img-thumbnail" src="{{ asset('build/images/e-mail.jpg') }}"></a><div class="carousel-caption d-none d-md-block">
+                    <h1>Nous contacter</h1>
+
+                </div></div>
+        </div>
+
+
+
+    </div>
+
+{% endblock %}

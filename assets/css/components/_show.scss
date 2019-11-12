@@ -1,0 +1,24 @@
+
+.show{
+
+
+  &__body{
+
+    padding-top: 2em;
+  }
+  &__img{
+    padding-bottom: 2em;
+  }
+  &__references{
+
+    padding-top: 3em;
+    &__title{
+      border-bottom: 2px solid snow;
+      padding-bottom: 1em;
+    }
+    &__download{
+      padding-top: 3em;
+
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="site__title text-center">
+        <h1>{{ article.title|upper}}</h1>
+        </div>
+        <div class="row show__body">
+            <div class="col-sm-8">
+                <img class="img-fluid show__img" src="{{uploaded_asset(article.imagePath)}}"><br>
+                <p>{{ article.content|raw }}</p>
+
+            </div>
+            <div class="col-sm-4 show__references">
+                <div class="show__references__title text-center">
+            <h3>Documents Téléchargeables</h3>
+                </div>
+                <ul class="list-group small show__references__download">
+                    {% for reference in article.articleReferences %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            {{ reference.originalFilename }}
+                            <span>
+                            <a href="{{ path('admin_article_download_reference', {
+                                id: reference.id
+                            }) }}"><span class="fa fa-download"></span></a>
+                        </span>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+
+<div>
+
+</div>
+    </div></div>
+{% endblock %}

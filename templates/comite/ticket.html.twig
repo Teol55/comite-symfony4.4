@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+    <div class="row justify-content-center site__title">
+        <h1>{{ title|upper }}</h1>
+    </div>
+<div class="ticket__container">
+        <div class="row ticket__offer__row ">
+
+
+          {% for ticket in tickets  %}
+
+
+
+            <div class="col-md-4 ticket__offer__container" style="flex-grow: 1;">
+            <div class="ticket__offer">
+
+                <img class="img-fluid" src="{{uploaded_asset(ticket.imagePath)}}">
+                <div class="ticket__offer__details">
+                    <div class="ticket__offer__title" > <strong>{{ ticket.title }}</strong> </div>
+                    <span class="ticket__offer__trait"></span></div>
+                <div class="ticket__offer__triangle"></div>
+            </div>
+                <div class="ticket__offer__spacer"></div>
+                <div id="ticket__offer__card" class="ticket__offer__card">
+                    <div class="ticket__cardBox">
+                    <h4  class="ticket_cardBox__name">{{ ticket.title|upper }}<span class="ticket__cardBox__trait"></span></h4>
+                    <div class="ticket__cardBox__prize"><span>Tarif : {{ ticket.priceCE }}€</span></div>
+                    <div class="ticket__cardBox__description">{{ ticket.description|raw }}</div>
+                    <a class="ticket__cardBox__close"><span>X</span></a>
+                     <div class="ticket__cardBox__redirection"><a href="{{ticket.url}}">Voir le site <i class="fa fa-chevron-circle-right fa-1x"></i> </a> </div>
+                    <div class="ticket__cardBox__button">
+                    <a href="#"class="btn btn-success float-right"><i class="fa fa-shopping-cart mr-1"></i>Ajouter </a>
+                    </div>
+                    </div>
+            </div></div>
+
+            {% if loop.index % 3 == 0 %}
+        </div><div class="row ticket__offer__row ">
+
+    {% endif %}
+
+            {% endfor %}
+
+        </div>
+        </div>
+        </div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+        {{ encore_entry_script_tags('ticket') }}
+    {% endblock %}

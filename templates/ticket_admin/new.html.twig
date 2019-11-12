@@ -1,0 +1,12 @@
+{% extends 'comite_admin/admin.html.twig' %}
+
+
+
+
+
+{% block content_body %}
+    <h1>Nouveau Billet</h1>
+    {{ include('ticket_admin/_form.html.twig', {
+        button_text: 'Ajouter!'
+    }) }}
+{% endblock %}

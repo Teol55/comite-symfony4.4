@@ -1,0 +1,22 @@
+<div class="header">
+
+    <a class="logo left" href="/">
+        <img src="{{ asset('build/images/logo.png') }}") alt="CE Battants">
+
+    </a>
+
+
+    {% block header_navigation %}
+
+
+
+
+                {% block navigation %}
+                    {{ include('comite/navigation.html.twig') }}
+                {% endblock %}
+
+
+    {% endblock %}
+
+
+</div>

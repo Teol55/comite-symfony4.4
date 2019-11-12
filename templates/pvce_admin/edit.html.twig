@@ -1,0 +1,23 @@
+{% extends 'comite_admin/admin.html.twig' %}
+
+{% block content_body %}
+
+    <h1>Modification du PV 🚀</h1>
+
+    <hr>
+    <div class="row">
+        <div class="col-sm-8">
+            <h3> Details</h3>
+
+            {{ include('pvce_admin/_form.html.twig', {
+                button_text: 'Modifier!'
+            }) }}
+        </div>
+
+
+    </div>
+
+
+
+
+{% endblock %}

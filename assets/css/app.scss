@@ -1,0 +1,67 @@
+@import '~bootstrap';
+@import "~bootstrap-social/bootstrap-social.css";
+@import "~font-awesome";
+////@import '~@fortawesome/fontawesome-free';
+//@import '~@fortawesome/fontawesome-free/css/solid';
+//@import '~@fortawesome/fontawesome-free/css/fontawesome';
+//@import '~@fortawesome/fontawesome-free/css/brands';
+@import './layout/header';
+@import './layout/footer';
+@import './components/hompage';
+@import './components/ticket';
+@import './components/tool';
+@import './components/show';
+@import './components/partner';
+html {
+width: 100%;
+}
+body {
+    background-color:#3498db;
+    margin: 0;
+    padding: 0;
+
+}
+
+.background {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    z-index: 0;
+
+}
+.g-signin2{
+    position: relative;
+    top:70px;
+    left: 40px;
+    text-align: center;
+}
+.site{
+
+  &__title{
+    border-bottom: 3px solid snow;
+    padding-top: 2em;
+    padding-bottom: 2em;
+  }
+  &__references{
+    padding-top: 3em;
+
+    &__title{
+      border-bottom: 2px solid snow;
+      padding-bottom: 1em;
+
+    }
+    &__lien{
+        padding-top:1em ;
+
+    }
+  }
+}
+
+/* Sortable */
+.sortable-ghost {
+    background-color: lightblue;
+}
+.drag-handle {
+    cursor: grab;
+}

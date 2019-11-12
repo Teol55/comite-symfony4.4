@@ -1,0 +1,71 @@
+{% block stylesheets %}
+
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('nav') }}
+    {{ encore_entry_link_tags('bouton') }}
+{% endblock %}
+
+
+
+<div class="toggle_btn">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+</div>
+
+<nav class="menu">
+    <div class="row">
+    <div class="menu__text col-md-6">
+        <a href="{{ path('app_homepage') }}">Accueil</a>
+        <a href="{{ path('app_tool') }}">Matériel</a>
+        <a href="{{ path('app_logout') }}">Se Déconnecter</a>
+
+        {% if is_granted('ROLE_ADMIN_ARTICLE') %}
+            <a  href="{{ path('admin_article_new') }}">Admin</a>
+        {% endif %}
+
+    </div>
+        <div class="contact col-md-6">
+                <div class="contact__text">
+            <h1>Peut-on vous aider?</h1>
+             <p>CSE Essilor BAttants<br>
+                Bureau 113,<br>
+                 Ligny en Barrois</p>
+            <h2>Tél:06-01-02-03-04</h2>
+                </div>
+{#                <div class="col-md-12">#}
+{#                    <button type="button" class="btn btn-link"><i class="fab fa-twitter fa-2x"></i></button>&nbsp;&nbsp;<button type="button" class="btn btn-link"><i class="fab fa-instagram fa-2x"></i></button>&nbsp;&nbsp;<button type="button" class="btn btn-link"><i class="fab fa-facebook-f fa-2x"></i></button>#}
+{#                </div>#}
+            <div class="buttons">
+            <a href="{{ path('app_contact') }}">
+
+                <button class="blob-btn-yellow">
+                   Contactez Nous
+                    <span class="blob-btn__inner">
+      <span class="blob-btn-yellow__blobs">
+        <span class="blob-btn-yellow__blob"></span>
+        <span class="blob-btn-yellow__blob"></span>
+        <span class="blob-btn-yellow__blob"></span>
+        <span class="blob-btn-yellow__blob"></span>
+      </span>
+                    </span></button>
+
+
+            </a>
+
+        </div>
+
+
+
+        </div>
+    </div>
+
+</nav>
+
+{% block javascripts %}
+
+    {{ encore_entry_script_tags('nav') }}
+
+
+{% endblock %}

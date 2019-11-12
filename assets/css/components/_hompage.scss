@@ -1,0 +1,64 @@
+.homepage-img_bas
+{
+ padding-top: 30px;
+}
+.carousel{
+
+ padding-top: 10px;
+ margin-top: 20px;
+ z-index: 0;
+
+    &-inner {
+     height: 100%;
+      }
+    &-item {
+      height:600px;
+      max-width: 100%;
+
+    }
+ &-caption{
+   background-color:rgba(189, 195, 199,0.6) ;
+ }
+ &-caption h1{
+
+ color: black;
+
+   }
+
+
+
+ &-item img {
+  height: 100%;
+ }
+
+}
+.homepage-img_bas{
+ z-index: 0;
+}
+.carousel-caption{
+ z-index: 0;
+}
+.homepage-img_bas a{
+ z-index: 3;
+}
+.recduction-img img{
+  padding-top: 50px;
+}
+@media screen and (max-width: 576px) {
+
+.carousel {
+
+  padding-top: 10px;
+  margin-top: 20px;
+  z-index: 0;
+
+  &-inner {
+    height: 100%;
+  }
+
+  &-item {
+    height: 400px;
+    max-width: 100%;
+
+  }
+}}

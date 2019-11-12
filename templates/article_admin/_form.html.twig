@@ -1,0 +1,26 @@
+{{ form_start(articleForm) }}
+    {{ form_row(articleForm.title, {
+        label: 'Titre de l\'article:'
+    }) }}
+<div class="row">
+    <div class="col-sm-9">{{ form_row(articleForm.imageFile, {
+            label: 'Image pour l\'article:',
+            attr: {
+
+                'placeholder':'Télécharger une image'
+            }
+        }) }}
+        <div class="col-sm-3">
+            {% if articleForm.vars.data.imageFilename|default %}
+            <a href="{{ uploaded_asset(articleForm.vars.data.imagePath) }}" target="_blank">
+                <img src="{{articleForm.vars.data.imagePath|imagine_filter('squared_thumbnail_small') }}" height="100">
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+    {{ form_row(articleForm.content,{'id':'js-textarea'}) }}
+    {{ form_row(articleForm.publishedAt) }}
+    {{ form_row(articleForm.publishedEnd) }}
+<button type="submit" class="btn btn-primary">{{ button_text }}</button>
+{{ form_end(articleForm) }}

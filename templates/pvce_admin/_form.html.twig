@@ -1,0 +1,16 @@
+{{ form_start(pvceForm) }}
+    {{ form_row(pvceForm.title, {
+        label: 'Titre du PV:'
+    }) }}
+<div class="row">
+    <div class="col-sm-9">{{ form_row(pvceForm.pdfFile, {
+            label: 'Fichier PDF du PV:',
+            attr: {
+
+                'placeholder':'Télécharger un fichier PDF'
+            }
+        }) }}
+    </div>
+    </div>
+    <button type="submit" class="btn btn-primary">{{ button_text }}</button>
+{{ form_end(pvceForm) }}

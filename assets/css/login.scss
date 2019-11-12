@@ -1,0 +1,35 @@
+body {
+  background-color: #3498db;
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden;
+}
+.particles-js
+{
+  height: 100%;
+  position: relative;
+  top:-300px;
+  left: 0px;
+}
+.login_part{
+
+  position: relative;
+  height: 300px;
+  width: 200px;
+  top: 500px;
+  //left: 600px;
+  background-color:snow;
+  text-align: center;
+  border-radius: 30px;
+
+}
+.btn-google{
+  border-color: #0b2e13;
+}
+@media screen and (max-width: 576px) {
+
+h1{
+  padding-top:2em;
+  font-size:1em ;
+}
+}

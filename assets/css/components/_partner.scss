@@ -1,0 +1,243 @@
+.partner{
+
+
+       &__offer:hover{
+        border: 4px solid rgba(52, 152, 219,1.0);
+        }
+
+      &__offer {
+        position: relative;
+        padding: 0;
+        height: 300px;
+        background: snow;
+                      & img {
+                          -webkit-clip-path: polygon(0 0, 0 60%, 100% 75%, 100% 0);
+                          height: 100%;
+                          width:100%;
+
+                           }
+                      &__triangle{
+                            width: 0;
+                            height: 0;
+                            border-color: transparent transparent #16181b;
+                            border-style: solid;
+                            border-width: 0 30px 24px;
+                            position: absolute;
+                            bottom: -45px;
+                            left: calc(50% - 15px);
+                            opacity:0;
+                      }
+                      &__row{
+                            max-width: 1200px;
+                            position: relative;
+                            flex-direction: row;
+                      }
+
+                      &__container{
+                            position: static;
+                            padding-top: 20px;
+
+
+
+                                  .partner__offer__card{
+                                        position: absolute;
+                                        bottom:0;
+                                        left: 0;
+                                        width: 100%;
+                                        height: 275px;
+                                        //width: 100%;
+                                        //padding: 10px 40px;
+                                        //background-color: #2f343b;
+                                        //-webkit-box-shadow: inset 0 5px 25px 0 rgba(0,0,0,.75);
+                                        //box-shadow: inset 0 5px 25px 0 rgba(0,0,0,.75);
+                                        //-webkit-clip-path: polygon(0 0,100% 0,100% 78%,0 100%);
+                                        //  transform: none;
+
+                                  }
+                      }
+                      &__title{
+
+                            position: relative;
+                            bottom:80px;
+                            left: 20px;
+
+                              & h4{
+                                    color: black;
+                              }
+
+                       }
+                      &__trait{
+                            display: block;
+                            position: relative;
+                            height: 4px;
+                            width: 40px;
+                            background-color: #33DBE8;
+                            top: -60px;
+                            left: 40px;
+                            border-radius: 30%;
+
+                      }
+                      &__details{
+                        height: auto;
+                        width: 100%;
+                      }
+
+      }
+      &__cardBox{
+                      //width: calc(100% - 20px);
+                      height: 275px;
+                      padding: 10px 40px;
+                      font-family: Helvetica-Neue,Helvetica,Arial,sans-serif;
+                      text-align: left;
+                      font-size: 14px;
+                      color:snow;
+                      background-color: #2f343b;
+                      -webkit-box-shadow: inset 0 5px 25px 0 rgba(0,0,0,.75);
+                      box-shadow: inset 0 5px 25px 0 rgba(0,0,0,.75);
+                      -webkit-clip-path: polygon(0 0,100% 0,100% 78%,0 100%);
+                      transform: none;
+                      z-index: 1;
+
+                     h4{
+                        color: whitesmoke;
+                       margin: 5px;
+                       padding-bottom:20px ;
+
+                      }
+                      &__trait{
+                        display: block;
+                        position: relative;
+                        height: 4px;
+                        width: 40px;
+                        background-color: #33DBE8;
+                        top: 10px;
+                        left: 0px;
+                        border-radius: 30%;
+
+                      }
+
+
+                      &__close{
+                        position:absolute;
+                        top: 20px;
+                        font-size: 20px;
+                        right: 20px;
+                        height: 16px;
+                        width: 16px;
+                        cursor: pointer;
+                       }
+                      &__prize{
+                        width: 120px;
+                        padding-bottom: 10px;
+                        border-bottom: 1px solid whitesmoke;
+
+                      }
+                      &__description{
+                        min-height: 30px;
+                        height: 80px;
+                        padding-top: 10px;
+
+
+                      }
+
+                      &__redirection{
+                        font-size: 20px;
+                        a{
+                          text-decoration: none;
+                        }
+
+                      }
+      }
+}
+.partner__offer__card {
+  display: none;
+}
+
+.test__offer--active .partner__offer__spacer {
+  height: 315px;
+}
+@media (max-width: 949px){
+.partner {
+    &__offer{
+      display: block;
+      background-color: #fff;
+      position: relative;
+      height: 320px;
+      //z-index: 1;
+
+            &__card{
+
+
+             }
+
+            &__container{
+               flex-basis: 100%!important;
+              width: auto!important;
+              margin-bottom: 12px;
+                  .partner__offer__card {
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    background-color: #fff;
+                    min-height: 100%;
+                    height: auto;
+                    width: 100%;
+
+                    overflow: scroll;
+                  }
+            }
+
+            &__spacer{
+              display: none;
+              overflow-x:hidden;
+              overflow-y:hidden;
+            }
+
+    }
+     &__cardBox{
+       display: block;
+          //width: calc(100% - 50px);
+          padding: 48px 25px 55px;
+          height: 520px;
+          clip-path: polygon(0 0,100% 0,100% 93%,0 98%);
+          -webkit-clip-path: polygon(0 0,100% 0,100% 93%,0 98%);
+          min-height: calc(100% - 20px);
+
+          h4{
+            display: block;
+            margin-block-start: 1.33em;
+            margin-block-end: 1.33em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            font-size:16px;
+          }
+          &__close{
+            top: 30px;
+            right: 16px;
+            z-index: 3;
+          }
+
+        }
+
+}
+
+.test__offer--active{
+  .partner__offer__card{
+    display: block;
+    height: auto;
+    opacity: 1;
+    z-index:999;
+  }
+}
+
+}
+@media only screen and (max-width: 639px){
+.partner{
+  &__offer{
+    &__row{
+      flex-direction: column;
+      margin: 0;
+    }
+
+  }
+}}

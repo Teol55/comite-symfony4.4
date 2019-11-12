@@ -1,0 +1,27 @@
+{{ form_start(ticketForm) }}
+    {{ form_row(ticketForm.title, {
+        label: 'Titre du billet:'
+    }) }}
+<div class="row">
+    <div class="col-sm-9">{{ form_row(ticketForm.imageFile, {
+            label: 'Image pour le billet:',
+            attr: {
+
+                'placeholder':'Télécharger une image'
+            }
+        }) }}
+        <div class="col-sm-3">
+            {% if ticketForm.vars.data.image|default %}
+            <a href="{{ uploaded_asset(ticketForm.vars.data.imagePath) }}" target="_blank">
+                <img src="{{ticketForm.vars.data.imagePath|imagine_filter('squared_thumbnail_small') }}" height="100">
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+    {{ form_row(ticketForm.description,{'id':'js-textarea'}) }}
+    {{ form_row(ticketForm.priceCE) }}
+    {{ form_row(ticketForm.url) }}
+
+<button type="submit" class="btn btn-primary">{{ button_text }}</button>
+{{ form_end(ticketForm) }}

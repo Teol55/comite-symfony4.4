@@ -1,0 +1,36 @@
+/*css footer*/
+.footer{
+  background-color: dodgerblue;
+  color: whitesmoke;
+}
+.menu-footer a{
+  display: block;
+  font-size: 20px;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+}
+.menu-footer-news{
+  display: block;
+  text-align: left;
+
+}
+.menu-footer-news label
+{
+
+  width: 100px;
+
+
+
+}
+.menu-footer-news input{
+  color:black;
+
+
+}
+.menu-footer-news button{
+  padding: 10px;
+  margin: 6px;
+  background-color: #00EDFF;
+  border-radius: 30px;
+}

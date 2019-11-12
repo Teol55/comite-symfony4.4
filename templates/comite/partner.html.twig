@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row justify-content-center site__title">
+            <h1>{{ title|upper }}</h1>
+        </div>
+        <div class="partner__container">
+            <div class="row partner__offer__row ">
+
+
+                {% for partner in partners  %}
+
+
+
+                <div class="col-md-4 partner__offer__container" style="flex-grow: 1;">
+                    <div class="partner__offer">
+
+                        <img class="img-fluid" src="{{uploaded_asset(partner.imagePath)}}">
+                        <div class="partner__offer__details">
+                            <div class="partner__offer__title" > <strong>{{ partner.name }}</strong> </div>
+                            <span class="partner__offer__trait"></span></div>
+                        <div class="partner__offer__triangle"></div>
+                    </div>
+                    <div class="partner__offer__spacer"></div>
+                    <div id="partner__offer__card" class="partner__offer__card">
+                        <div class="partner__cardBox">
+                            <h4  class="partner_cardBox__name">{{ partner.name|upper }}<span class="partner__cardBox__trait"></span></h4>
+                            <div class="partner__cardBox__prize"><span>Type de réduction: {{ partner.typeReduction }}€</span></div>
+                            <div class="partner__cardBox__description">{{ partner.description|raw }}</div>
+                            <a class="partner__cardBox__close"><span>X</span></a>
+                            <div class="partner__cardBox__redirection"><a href="{{ partner.url }}">Voir le site <i class="fa fa-chevron-circle-right fa-1x"></i> </a> </div>
+                                                    </div>
+                    </div></div>
+
+                {% if loop.index % 3 == 0 %}
+            </div><div class="row partner__offer__row ">
+
+                {% endif %}
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('partner') }}
+{% endblock %}
+
+
+

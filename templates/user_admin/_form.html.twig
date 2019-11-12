@@ -1,0 +1,10 @@
+{{ form_start(userForm) }}
+    {{ form_row(userForm.email, {
+        label: 'Email du salarié:'
+    }) }}
+    {{ form_row(userForm.forname) }}
+    {{ form_row(userForm.surname) }}
+    {{ form_row(userForm.nbPersonne) }}
+
+<button type="submit" class="btn btn-primary">{{ button_text }}</button>
+{{ form_end(userForm) }}
