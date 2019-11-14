@@ -1,8 +1,18 @@
 {
     "devDependencies": {
         "@symfony/webpack-encore": "^0.28.0",
+        "autocomplete.js": "^0.37.0",
+        "autoprefixer": "^9.7.1",
+        "bootstrap": "^4.3.1",
         "core-js": "^3.0.0",
+        "dropzone": "^5.5.1",
+        "jquery": "^3.4.1",
+        "node-sass": "^4.13.0",
+        "popper.js": "^1.16.0",
+        "postcss-loader": "^3.0.0",
         "regenerator-runtime": "^0.13.2",
+        "sass-loader": "^7.0.1",
+        "sortablejs": "^1.10.1",
         "webpack-notifier": "^1.6.0"
     },
     "license": "UNLICENSED",
@@ -12,5 +22,12 @@
         "dev": "encore dev",
         "watch": "encore dev --watch",
         "build": "encore production --progress"
+    },
+    "dependencies": {
+        "bootstrap-social": "^5.1.1",
+        "copy-webpack-plugin": "^5.0.5",
+        "font-awesome": "^4.7.0",
+        "particles.js": "^2.0.0",
+        "tinymce": "^5.1.1"
     }
 }

@@ -1,7 +1,7 @@
 security:
     encoders:
         App\Entity\User:
-            algorithm: bcrypt
+            algorithm: auto
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
@@ -19,7 +19,7 @@ security:
             logout:
                 path: /logout
                 target: /login
-            logout_on_user_change: true
+#            logout_on_user_change: true
 
             guard:
                 authenticators:
