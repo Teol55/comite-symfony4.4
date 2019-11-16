@@ -79,6 +79,21 @@ class User implements UserInterface
      */
     private $requests;
 
+    /**
+     * @ORM\Column(type="boolean",nullable=true)
+     */
+    private $isComite;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $phoneNumber;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $syndicat;
+
     public function __construct()
     {
         $this->requests = new ArrayCollection();
@@ -273,6 +288,42 @@ class User implements UserInterface
                 $request->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsComite(): ?bool
+    {
+        return $this->isComite;
+    }
+
+    public function setIsComite(bool $isComite): self
+    {
+        $this->isComite = $isComite;
+
+        return $this;
+    }
+
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(?string $phoneNumber): self
+    {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    public function getSyndicat(): ?string
+    {
+        return $this->syndicat;
+    }
+
+    public function setSyndicat(?string $syndicat): self
+    {
+        $this->syndicat = $syndicat;
 
         return $this;
     }

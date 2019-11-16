@@ -1,0 +1,98 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row justify-content-center site__title">
+            <h1>{{ title|upper }}</h1>
+        </div>
+
+        <div class="row tool__table">
+            <caption>
+                <h4>Membres CSE adhérent à la  CGT
+                </h4>
+            </caption>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Noms</th>
+                    <th scope="col">Prénoms</th>
+                    <th scope="col">Adresse Email</th>
+                    <th scope="col">Téléphone</th>
+                </tr>
+                </thead>
+                <tbody>
+            {% for user in cgtUsers  %}
+
+                <tr>
+                    <th scope="row">{{ user.forname|upper }}</th>
+                    <td>{{ user.surname }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.phoneNumber }}</td>
+
+                </tr>
+            {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+            <div class="row tool__table">
+                <caption>
+                    <h4>Membres CSE adhérent à la CFE-CGC
+                    </h4>
+                </caption>
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Noms</th>
+                        <th scope="col">Prénoms</th>
+                        <th scope="col">Adresse Email</th>
+                        <th scope="col">Téléphone</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in cfeUsers  %}
+
+                        <tr>
+                            <th scope="row">{{ user.forname|upper }}</th>
+                            <td>{{ user.surname }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.phoneNumber }}</td>
+
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+        <div class="row tool__table">
+            <caption>
+                <h4>Membres CSE Sans Etiquette
+                </h4>
+            </caption>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Noms</th>
+                    <th scope="col">Prénoms</th>
+                    <th scope="col">Adresse Email</th>
+                    <th scope="col">Téléphone</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in sansUsers  %}
+
+                    <tr>
+                        <th scope="row">{{ user.forname|upper }}</th>
+                        <td>{{ user.surname }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.phoneNumber }}</td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

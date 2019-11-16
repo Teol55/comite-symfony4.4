@@ -10,6 +10,7 @@ use App\Repository\PartnerRepository;
 use App\Repository\PvceRepository;
 use App\Repository\TicketRepository;
 use App\Repository\ToolRepository;
+use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -133,7 +134,24 @@ class ComiteController extends AbstractController
 
         ]);
     }
+    /**
+     * @Route("/team", name="app_team")
+     */
+    public function team(UserRepository $userRepository)
+    {
+        $cgtUsers=$userRepository->findby(['isComite'=>1,'syndicat'=>'cgt'], ['forname' => 'asc']);
+        $cfeUsers=$userRepository->findby(['isComite'=>1,'syndicat'=>'cfe'], ['forname' => 'asc']);
+        $sansUsers=$userRepository->findby(['isComite'=>1,'syndicat'=>'sans'], ['forname' => 'asc']);
 
+        return $this->render('comite/team.html.twig', [
+            'cgtUsers' => $cgtUsers,
+            'cfeUsers' => $cfeUsers,
+            'sansUsers' => $sansUsers,
+
+
+            'title'=> 'Notre Equipe'
+        ]);
+    }
 }
 
 
