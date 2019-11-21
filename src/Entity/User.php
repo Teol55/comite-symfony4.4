@@ -94,6 +94,11 @@ class User implements UserInterface
      */
     private $syndicat;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $smartphone;
+
     public function __construct()
     {
         $this->requests = new ArrayCollection();
@@ -324,6 +329,18 @@ class User implements UserInterface
     public function setSyndicat(?string $syndicat): self
     {
         $this->syndicat = $syndicat;
+
+        return $this;
+    }
+
+    public function getSmartphone(): ?string
+    {
+        return $this->smartphone;
+    }
+
+    public function setSmartphone(?string $smartphone): self
+    {
+        $this->smartphone = $smartphone;
 
         return $this;
     }

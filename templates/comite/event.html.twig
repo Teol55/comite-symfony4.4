@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+    <div class="row justify-content-center site__title">
+        <h1>{{ title|upper }}</h1>
+    </div>
+<div class="event__container">
+        <div class="row event__offer__row ">
+
+
+          {% for event in events  %}
+
+
+
+            <div class="col-md-4 event__offer__container" style="flex-grow: 1;">
+            <div class="event__offer">
+
+                <img class="img-fluid" src="{{uploaded_asset(event.imagePath)}}">
+                <div class="event__offer__details">
+                    <div class="event__offer__title" > <strong>{{ event.name }}</strong> </div>
+                    <span class="event__offer__trait"></span></div>
+                <div class="event__offer__triangle"></div>
+            </div>
+                <div class="event__offer__spacer"></div>
+                <div id="event__offer__card" class="event__offer__card">
+                    <div class="event__cardBox">
+                    <h4  class="event_cardBox__name">{{ event.name|upper }}<span class="event__cardBox__trait"></span></h4>
+                    <div class="event__cardBox__prize"><span>Tarif : {{ event.type }}</span></div>
+                    <div class="event__cardBox__description">{{ event.description|raw }}</div>
+                    <a class="event__cardBox__close"><span>X</span></a>
+
+                    </div>
+            </div></div>
+
+            {% if loop.index % 3 == 0 %}
+        </div><div class="row event__offer__row ">
+
+    {% endif %}
+
+            {% endfor %}
+
+        </div>
+        </div>
+        </div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+        {{ encore_entry_script_tags('event') }}
+    {% endblock %}

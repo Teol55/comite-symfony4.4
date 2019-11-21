@@ -1,0 +1,27 @@
+{{ form_start(eventForm) }}
+    {{ form_row(eventForm.name, {
+        label: 'Nom de l\'événement:'
+    }) }}
+<div class="row">
+    <div class="col-sm-9">{{ form_row(eventForm.imageFile, {
+            label: 'Image pour l\'événement:',
+            attr: {
+
+                'placeholder':'Télécharger une image'
+            }
+        }) }}
+        <div class="col-sm-3">
+            {% if eventForm.vars.data.image|default %}
+            <a href="{{ uploaded_asset(eventForm.vars.data.imagePath) }}" target="_blank">
+                <img src="{{eventForm.vars.data.imagePath|imagine_filter('squared_thumbnail_small') }}" height="100">
+            </a>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+    {{ form_row(eventForm.description,{'id':'js-textarea'}) }}
+    {{ form_row(eventForm.type) }}
+
+
+<button type="submit" class="btn btn-primary">{{ button_text }}</button>
+{{ form_end(eventForm) }}

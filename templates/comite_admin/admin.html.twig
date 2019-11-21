@@ -48,6 +48,15 @@
                         </div>
                     </div>
                     <div class="card-header">
+                        <a href="#event" class="card-link" data-toggle="collapse" data-parent="#accordeon">Evenements</a>
+                    </div>
+                    <div class="collapse" id="event">
+                        <div class="list-group">
+                            <a class="list-group-item" href="{{ path('admin_event_new') }}"><span class="fa fa-newspaper-o"></span>Nouveau</a>
+                            <a class="list-group-item" href="{{ path('admin_event_list') }}"><span class="fa fa-pencil"></span> liste</a>
+                        </div>
+                    </div>
+                    <div class="card-header">
                         <a href="#tool" class="card-link" data-toggle="collapse" data-parent="#accordeon">Matériels</a>
                     </div>
                     <div class="collapse" id="tool">

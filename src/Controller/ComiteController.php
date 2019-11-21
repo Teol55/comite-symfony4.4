@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Pvce;
 use App\Form\ContactFormType;
 use App\Repository\ArticleRepository;
+use App\Repository\EventRepository;
 use App\Repository\PartnerRepository;
 use App\Repository\PvceRepository;
 use App\Repository\TicketRepository;
@@ -151,6 +152,16 @@ class ComiteController extends AbstractController
 
             'title'=> 'Notre Equipe'
         ]);
+    }
+    /**
+     * @Route("/evenements",name="app_event")
+     */
+    public function Event(EventRepository $repository)
+    {
+        $events= $repository->findAll();
+        return $this->render('comite/event.html.twig', [
+            'title' => 'Evénements Battants',
+            'events'=> $events ,]);
     }
 }
 

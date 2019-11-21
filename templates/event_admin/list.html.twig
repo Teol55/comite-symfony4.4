@@ -1,0 +1,52 @@
+{% extends 'comite_admin/admin.html.twig' %}
+
+
+
+
+
+{% block content_body %}
+    <a href="{{ path('admin_event_new') }}" class="btn btn-primary pull-right">
+        Nouveau  <span class="fa fa-plus-circle"></span>
+    </a>
+
+    <h1>Tous les événements </h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>description</th>
+            <th>type</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for event  in events %}
+            <tr>
+                <td>{{ event.name }}</td>
+                <td>{{ event.description|raw}}</td>
+                <td>
+                   {{ event.type }}
+                </td>
+
+                <td>
+                    <a href="{{ path('admin_event_edit', {
+                        id: event.id
+                    }) }}">
+                        <span class="fa fa-pencil"></span>
+                    </a>
+                </td>
+                <td>
+                    <a href="{{ path('admin_event_delete', {
+                        id: event.id
+                    }) }}">
+                        <span class="fa fa-trash"></span>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
