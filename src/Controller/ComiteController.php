@@ -12,6 +12,7 @@ use App\Repository\PvceRepository;
 use App\Repository\TicketRepository;
 use App\Repository\ToolRepository;
 use App\Repository\UserRepository;
+use App\Service\CartService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,8 +32,10 @@ class ComiteController extends AbstractController
     /**
      * @Route("/", name="app_homepage")
      */
-    public function index(ArticleRepository $articleRepos,PvceRepository $pvceRepository)
+    public function index(ArticleRepository $articleRepos,PvceRepository $pvceRepository,CartService $cart)
     {
+//        $panier=$cart->initializeTicket();
+//            dd($panier);
         $pvce=$pvceRepository->findOneBy([], ['id' => 'desc']);
         $articles=$articleRepos->findIsPublish();
         return $this->render('comite/index.html.twig', [
@@ -49,16 +52,7 @@ class ComiteController extends AbstractController
         return $this->render('comite/show.html.twig', [
                 'article' => $article,]);
     }
-    /**
-     * @Route("/billetterie",name="app_billetterie")
-     */
-    public function Ticket(TicketRepository $repository)
-    {
-        $tickets= $repository->findAll();
-        return $this->render('comite/ticket.html.twig', [
-            'title' => 'Billetterie Battants',
-            'tickets'=> $tickets ,]);
-    }
+
 
     /**
      * @Route("/PvCSE/{id}",name="app_PvCSE")

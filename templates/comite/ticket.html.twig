@@ -33,7 +33,13 @@
                     <a class="ticket__cardBox__close"><span>X</span></a>
                      <div class="ticket__cardBox__redirection"><a href="{{ticket.url}}">Voir le site <i class="fa fa-chevron-circle-right fa-1x"></i> </a> </div>
                     <div class="ticket__cardBox__button">
-                    <a href="#"class="btn btn-success float-right"><i class="fa fa-shopping-cart mr-1"></i>Ajouter </a>
+                        <form action="{{ path('app_cart_add',{'id':ticket.id}) }}" method="post">
+                            <input type="number" name="nbTicket"
+                                   min="1" max="{{ user.nbPersonne }}">
+                            <button type="submit" class="btn btn-success float-right"><i class="fa fa-shopping-cart mr-1"></i>Ajouter </button>
+
+                        </form>
+
                     </div>
                     </div>
             </div></div>
