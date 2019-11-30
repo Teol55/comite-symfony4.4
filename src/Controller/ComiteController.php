@@ -34,12 +34,12 @@ class ComiteController extends AbstractController
      */
     public function index(ArticleRepository $articleRepos,PvceRepository $pvceRepository,CartService $cart)
     {
-//        $panier=$cart->initializeTicket();
-//            dd($panier);
+
         $pvce=$pvceRepository->findOneBy([], ['id' => 'desc']);
         $articles=$articleRepos->findIsPublish();
         return $this->render('comite/index.html.twig', [
             'articles' => $articles,
+            'items'=>  $cart->showItems(),
             'pvce' => $pvce
         ]);
     }
@@ -47,52 +47,58 @@ class ComiteController extends AbstractController
     /**
      * @Route("/articles/{slug}",name="app_articles")
      */
-    public function show(Article $article)
+    public function show(Article $article, CartService $cart)
     {
         return $this->render('comite/show.html.twig', [
-                'article' => $article,]);
+                'article' => $article,
+            'items'=>  $cart->showItems(),
+            ]);
     }
 
 
     /**
      * @Route("/PvCSE/{id}",name="app_PvCSE")
      */
-    public function PvCE(Pvce $pvce,PvceRepository $pvceRepository)
+    public function PvCE(Pvce $pvce,PvceRepository $pvceRepository,CartService $cart)
     {
 
         $pvces=$pvceRepository->findAll();
         return $this->render('comite/PvCSE.html.twig', [
             'pvce'=> $pvce,
             'pvces'=>$pvces,
+            'items'=>  $cart->showItems(),
         ]);
     }
     /**
      * @Route("/partenaires",name="app_partenaire")
      */
-    public function partenaire (PartnerRepository $repository)
+    public function partenaire (PartnerRepository $repository,CartService $cart)
 
     {
         $partners=$repository->findAll();
         return $this->render('comite/partner.html.twig', [
             'title' => 'Nos Partenaires',
             'partners'=> $partners,
+            'items'=>  $cart->showItems(),
         ]);
     }
     /**
      * @Route("/outillage",name="app_tool")
      */
-    public function tool (ToolRepository $repository)
+    public function tool (ToolRepository $repository, CartService $cart)
     {
         $tools=$repository->findAll();
         return $this->render('comite/tool.html.twig', [
             'title'=> 'Location de Materiel',
-            'tools' => $tools
+            'tools' => $tools,
+            'items'=>  $cart->showItems(),
+
         ]);
     }
     /**
      * @Route("/contact", name="app_contact")
      */
-    public function contact(Request $request,\Swift_Mailer $swift_Mailer)
+    public function contact(Request $request,\Swift_Mailer $swift_Mailer,CartService $cart)
     {
 
 
@@ -125,14 +131,15 @@ class ComiteController extends AbstractController
 
         return $this->render('comite/contact.html.twig', [
             'contactForm' => $form->createView(),
-            'title'=>'Contact'
+            'title'=>'Contact',
+            'items'=>  $cart->showItems(),
 
         ]);
     }
     /**
      * @Route("/team", name="app_team")
      */
-    public function team(UserRepository $userRepository)
+    public function team(UserRepository $userRepository,CartService $cart)
     {
         $cgtUsers=$userRepository->findby(['isComite'=>1,'syndicat'=>'cgt'], ['forname' => 'asc']);
         $cfeUsers=$userRepository->findby(['isComite'=>1,'syndicat'=>'cfe'], ['forname' => 'asc']);
@@ -144,18 +151,21 @@ class ComiteController extends AbstractController
             'sansUsers' => $sansUsers,
 
 
-            'title'=> 'Notre Equipe'
+            'title'=> 'Notre Equipe',
+            'items'=>  $cart->showItems(),
         ]);
     }
     /**
      * @Route("/evenements",name="app_event")
      */
-    public function Event(EventRepository $repository)
+    public function Event(EventRepository $repository,CartService $cart)
     {
         $events= $repository->findAll();
         return $this->render('comite/event.html.twig', [
             'title' => 'Evénements Battants',
-            'events'=> $events ,]);
+            'events'=> $events ,
+            'items'=>  $cart->showItems(),
+            ]);
     }
 }
 

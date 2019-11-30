@@ -3,10 +3,17 @@
     {{ encore_entry_link_tags('app') }}
     {{ encore_entry_link_tags('nav') }}
     {{ encore_entry_link_tags('bouton') }}
+    {{ encore_entry_link_tags('ticket') }}
 {% endblock %}
+{% if items is defined and items|length > 0 %}
+<a href="{{path('app_cart_index')}}"> <div class="ticket__cart"><i class="fa fa-shopping-cart fa-lg ticket__cart__img"></i>
 
 
+            <div class="ticket__cart__number">{{ items|length }}</div>
 
+
+    </div></a>
+{% endif %}
 <div class="toggle_btn">
     <span></span>
     <span></span>

@@ -152,6 +152,38 @@
 
                       }
       }
+
+      &__cart{
+        position: absolute;
+        top: 5px;
+        right:50px;
+        height: 40px;
+        width: 40px;
+        //background: blue;
+        border-radius: 50%;
+        text-align: center;
+        z-index: 1;
+
+
+        &__img{
+          margin: auto;
+          color: black;
+        }
+        &__number {
+          background: red;
+          border-radius: 50%;
+          position: relative;
+          bottom: 20%;
+          left: 50%;
+          height: 15px;
+          width: 15px;
+          z-index:3;
+          color: black;
+          font-size: x-small;
+
+        }
+
+      }
 }
 .ticket__offer__card {
   display: none;
@@ -248,4 +280,5 @@
     }
 
   }
+
 }}

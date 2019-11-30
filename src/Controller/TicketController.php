@@ -23,12 +23,13 @@ class TicketController extends AbstractController
     /**
      * @Route("/billetterie",name="app_billetterie")
      */
-    public function Ticket(TicketRepository $repository,UserInterface $user)
+    public function Ticket(TicketRepository $repository,UserInterface $user,CartService $cart)
     {
         $tickets= $repository->findAll();
         return $this->render('comite/ticket.html.twig', [
             'title' => 'Billetterie Battants',
             'tickets'=> $tickets ,
+            'items'=>  $cart->showItems(),
             'user'=> $user]);
     }
     /**
