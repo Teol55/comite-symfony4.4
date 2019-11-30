@@ -9,8 +9,10 @@
 namespace App\Service;
 
 use App\Controller\TicketController;
+use App\Entity\LigneRequest;
 use App\Entity\Request;
 use App\Entity\Ticket;
+use App\Entity\User;
 use App\Repository\TicketRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\DBAL\Types\IntegerType;
@@ -18,6 +20,7 @@ use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 
 
 class CartService extends AbstractController
@@ -41,6 +44,10 @@ class CartService extends AbstractController
      * @var TicketRepository
      */
     private $ticketRepository;
+    /**
+     * @var UserInterface
+     */
+    private $user;
 
     public function __construct(\Swift_Mailer $swift_Mailer, ObjectManager $manager, SessionInterface $session,TicketRepository $ticketRepository)
     {
@@ -50,9 +57,10 @@ class CartService extends AbstractController
         $this->session = $session;
 
         $this->ticketRepository = $ticketRepository;
+
     }
 
-    public function save(Ticket $ticket)
+    public function save(array $items,$total,User $user)
     {
 //        if($ticket->getCustomer()->getId()){
 //            $ticket->setCustomer($this->manager->merge($ticket->getCustomer()));
@@ -61,20 +69,33 @@ class CartService extends AbstractController
 //        $ticket->setCreatedAt(new \DateTime());
 //        $ticket->setReference($ticket->getCreatedAt()->getTimestamp() . $ticket->getCustomer()->getStripeCustomerId());
 
+    $commande=new Request();
+    foreach ($items as $item)
+    {
+        $ligne=new LigneRequest();
+        $ligne->setTicket($item['ticket']);
+        $ligne->setNbTicket($item['quantity']);
+        $ligne->setPrice($item['ticket']->getPriceCe() * $item['quantity']);
+        $this->manager->persist($ligne);
+        $commande->addLigneRequest($ligne);
+    }
+    $commande->setPrice($total);
+    $commande->setCreatedAt(new \DateTime());
+$commande->setUser($user);
 
-
-        $this->manager->persist($ticket);
+        $this->manager->persist($commande);
         $this->manager->flush();
 
+        return $commande;
     }
 
-    public function sendMessage(Ticket $ticket)
+    public function sendMessage(Request $commande)
     {
         $message = (new \Swift_Message('Confirmation de Commande'))
-            ->SetFrom('Billettrie@louvre.fr')
-            ->setTo($ticket->getCustomer()->getAdresseEmail())
-            ->setBody($this->renderView('email.html.twig',
-                ['ticket' => $ticket]), 'text/html');
+            ->SetFrom('m.ch@atipicwebdesign.fr')
+            ->setTo($commande->getUser()->getEmail())
+            ->setBody($this->renderView('comite/email.html.twig',
+                ['commande' => $commande]), 'text/html');
         $this->swift_Mailer->send($message);
 
     }
@@ -106,7 +127,7 @@ class CartService extends AbstractController
         $this->session->set(CartService::SESSION_CART, $cart);
         return $cart;
     }
-    public function closeTicket()
+    public function closeCart()
     {
         return $this->session->clear();
     }

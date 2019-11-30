@@ -66,4 +66,19 @@ class TicketController extends AbstractController
         );
 
     }
+    /**
+     * @Route("/cart/send",name="app_cart_send")
+     */
+    public function cartSend(CartService $cart,UserInterface $user)
+    {
+$paniers=$cart->showItems();
+$total=$cart->total();
+$commande=$cart->save($paniers,$total,$user);
+$cart->sendMessage($commande);
+$cart->closeCart();
+
+//        $cart->removeItem($id);
+        return $this->redirectToRoute('app_homepage');
+    }
+
 }

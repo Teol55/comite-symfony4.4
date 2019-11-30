@@ -17,7 +17,7 @@ class LigneRequest
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Ticket", inversedBy="NbTicket", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ticket", inversedBy="NbTicket", cascade={"persist", "remove"})
      */
     private $ticket;
 
