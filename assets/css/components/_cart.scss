@@ -1,0 +1,19 @@
+.cart{
+
+  &__text{
+
+    padding-top: 50px;
+    color: black;
+    font-size: 2em;
+    text-align: center;
+  }
+
+  &__button{
+
+    margin-top: 30px;
+
+    &__back{
+      margin-right: 30px;
+    }
+  }
+}

@@ -2,8 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\LigneRequest;
+use App\Entity\Ticket;
+use App\Repository\RequestRepository;
 use App\Repository\TicketRepository;
 use App\Service\CartService;
+use App\Validator\NumberTicketByMonthValidator;
 use phpDocumentor\Reflection\Types\Integer;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -35,16 +39,23 @@ class TicketController extends AbstractController
     /**
      * @Route("/cart/add/{id}",name="app_cart_add")
      */
-    public function cartAdd($id,CartService $cart,Request $request)
+    public function cartAdd(Ticket $id,CartService $cart,Request $request,RequestRepository $repo,UserInterface $user)
     {
+
+        $panier=$cart->getCurrentCart();
+//        $nbTicket=$repo->countByNbTicket($id->getId(),$user);
+//        dd($nbTicket);
+
         $result=intval($request->get('nbTicket'));
-        $cart->addItem($id,$result);
+
+        $panier->addLigneRequest($cart->addItem($id,$result));
+//dd($panier);
         return $this->redirectToRoute('app_billetterie');
     }
     /**
      * @Route("/cart/remove/{id}",name="app_cart_remove")
      */
-    public function cartRemove($id,CartService $cart,Request $request)
+    public function cartRemove( $id,CartService $cart,Request $request)
     {
 
         $cart->removeItem($id);
@@ -73,12 +84,31 @@ class TicketController extends AbstractController
     {
 $paniers=$cart->showItems();
 $total=$cart->total();
+
 $commande=$cart->save($paniers,$total,$user);
 $cart->sendMessage($commande);
+
+
+
+        return $this->redirectToRoute('app_cart_confirm');
+    }
+    /**
+     * @Route("/panier/confirmation",name="app_cart_confirm")
+     */
+    public function confirmation( CartService $cart)
+    {
+$items=$cart->showItems();
+$total=$cart->total();
 $cart->closeCart();
 
-//        $cart->removeItem($id);
-        return $this->redirectToRoute('app_homepage');
-    }
 
+        return $this->render('comite/confirmation.html.twig', [
+                'title' => 'Confirmation de votre réservation',
+                'items'=>  $items,
+                'total'=> $total
+
+            ]
+        );
+
+    }
 }

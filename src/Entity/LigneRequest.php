@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
+use App\Validator\NumberTicketByMonth;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LigneRequestRepository")
- */
+  */
 class LigneRequest
 {
     /**
@@ -16,10 +17,7 @@ class LigneRequest
      */
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Ticket", inversedBy="NbTicket", cascade={"persist", "remove"})
-     */
-    private $ticket;
+
 
     /**
      * @ORM\Column(type="integer")
@@ -32,26 +30,20 @@ class LigneRequest
     private $price;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Request", inversedBy="ligneRequest")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Request", inversedBy="ligneRequest", cascade={"persist", "remove"})
      */
     private $request;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ticket", inversedBy="ligneRequests")
+     */
+    private $ticket;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getTicket(): ?Ticket
-    {
-        return $this->ticket;
-    }
-
-    public function setTicket(?Ticket $ticket): self
-    {
-        $this->ticket = $ticket;
-
-        return $this;
-    }
 
     public function getNbTicket(): ?int
     {
@@ -85,6 +77,18 @@ class LigneRequest
     public function setRequest(?Request $request): self
     {
         $this->request = $request;
+
+        return $this;
+    }
+
+    public function getTicket(): ?Ticket
+    {
+        return $this->ticket;
+    }
+
+    public function setTicket(?Ticket $ticket): self
+    {
+        $this->ticket = $ticket;
 
         return $this;
     }

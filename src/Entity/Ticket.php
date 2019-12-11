@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Service\UploaderHelper;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,15 +39,23 @@ class Ticket
      */
     private $priceCE;
 
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\LigneRequest", mappedBy="ticket", cascade={"persist", "remove"})
-     */
-    private $ligneRequest;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $url;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\LigneRequest", mappedBy="ticket")
+     */
+    private $ligneRequests;
+
+    public function __construct()
+    {
+
+        $this->ligneRequests = new ArrayCollection();
+    }
+//    public function __toString() { return strval($this->getId()); }
 
     public function getId(): ?int
     {
@@ -100,23 +110,7 @@ class Ticket
         return $this;
     }
 
-    public function getLigneRequest(): ?LigneRequest
-    {
-        return $this->ligneRequest;
-    }
 
-    public function setLigneRequest(?LigneRequest $ligneRequest): self
-    {
-        $this->ligneRequest = $ligneRequest;
-
-        // set (or unset) the owning side of the relation if necessary
-        $newTicket = $ligneRequest === null ? null : $this;
-        if ($newTicket !== $ligneRequest->getTicket()) {
-            $ligneRequest->setTicket($newTicket);
-        }
-
-        return $this;
-    }
     public function getImagePath()
     {
         return UploaderHelper::TICKET_IMAGE.'/'.$this->getImage();
@@ -130,6 +124,37 @@ class Ticket
     public function setUrl(?string $url): self
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|LigneRequest[]
+     */
+    public function getLigneRequests(): Collection
+    {
+        return $this->ligneRequests;
+    }
+
+    public function addLigneRequest(LigneRequest $ligneRequest): self
+    {
+        if (!$this->ligneRequests->contains($ligneRequest)) {
+            $this->ligneRequests[] = $ligneRequest;
+            $ligneRequest->setTicket($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLigneRequest(LigneRequest $ligneRequest): self
+    {
+        if ($this->ligneRequests->contains($ligneRequest)) {
+            $this->ligneRequests->removeElement($ligneRequest);
+            // set the owning side to null (unless already changed)
+            if ($ligneRequest->getTicket() === $this) {
+                $ligneRequest->setTicket(null);
+            }
+        }
 
         return $this;
     }

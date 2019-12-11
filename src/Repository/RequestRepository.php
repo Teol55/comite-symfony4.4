@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Request;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -18,7 +19,24 @@ class RequestRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Request::class);
     }
+    public function countByNbTicket($ticket,User $user)
+    {
 
+        return $this->createQueryBuilder('r')
+            ->innerJoin('r.ligneRequest','l')
+            ->select('SUM(l.NbTicket)')
+            ->andWhere('l.ticket = :ticketId')
+            ->andWhere('r.user= :userId')
+//            ->andWhere('t.dateVisit>= :date_start')
+//            ->andWhere('t.dateVisit <= :date_end')
+//            ->setParameter('date_start', $date->format('Y-m-d 00:00:00'))
+//            ->setParameter('date_end',   $date->format('Y-m-d 23:59:59'))
+            ->setParameter('ticketId',$ticket)
+            ->setParameter('userId',$user->getId())
+            ->getQuery()
+            ->getSingleScalarResult();
+
+    }
     // /**
     //  * @return Request[] Returns an array of Request objects
     //  */

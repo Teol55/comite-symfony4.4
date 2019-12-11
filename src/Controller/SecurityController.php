@@ -20,7 +20,7 @@ class SecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
         if(!$this->getUser()) {
-            $this->addFlash('warning', 'Pour ce connecter, il faut être salarié de l\'entreprise');
+            $this->addFlash('warning', 'Pour se connecter, il faut être salarié de l\'entreprise');
         }
         return $this->render('security/login.html.twig', [
             'last_username' => $lastUsername,

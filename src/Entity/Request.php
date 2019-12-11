@@ -29,7 +29,7 @@ class Request
     private $price;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\LigneRequest", mappedBy="request")
+     * @ORM\OneToMany(targetEntity="App\Entity\LigneRequest", mappedBy="request", cascade={"persist", "remove"})
      */
     private $ligneRequest;
 

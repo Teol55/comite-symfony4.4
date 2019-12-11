@@ -7,9 +7,9 @@
         <div class="row justify-content-center site__title">
             <h1>{{ title|upper }}</h1>
         </div>
-
-
-{% if items|length>0 %}
+        <div class="cart__text">
+            <p> Votre réservation est validée.<br>Elle sera disponible dès la prochaine ouverture de votre CSE.<br> </p>
+        </div><div class="text-right"><p>Les Membres de votre CSE</p></div>
     <div class="row tool__table">
 <table class="table table-striped">
     <thead class="thead-dark">
@@ -18,36 +18,31 @@
             <th>Prix</th>
             <th>Quantité</th>
             <th>Total</th>
-            <th></th>
+
         </tr>
     </thead>
     <tbody>
-    {% for key,item in items %}
+    {% for item in items %}
         <tr>
             <td>{{ item.ticket.title }}</td>
             <td>{{ item.ticket.priceCE }}</td>
             <td>{{ item.quantity }}</td>
             <td>{{ item.quantity * item.ticket.priceCe }}€</td>
-            <td><a href="{{ path('app_cart_remove',{'id':item.key}) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a></td>
+
         </tr>
      {% endfor %}
     </tbody>
     <tfoot>
     <tr>
-        <td colspan="3" class="text-right">Total :</td>
+        <td colspan="3" class="text-right">Total : </td>
         <td>{{ total }}€</td>
         <td></td>
     </tr>
     </tfoot>
-</table>    <button type="submit" class="btn btn-success  cart__button cart__button__submit"><a href="{{ path('app_cart_send') }}">Valider</a> </button>
-    </div>
+</table>
+    <button class="btn btn-success float-right"><a href="{{ path('app_homepage') }}">Retour à la page d'accueil</a> </button></div>
 
 
-
-        {% else %}
-    <div class="row cart__text ">Votre panier est vide!!!!</div>
-        {% endif %}
-        <button type="submit" class="btn btn-success  cart__button cart__button__back"><a href="{{ path('app_billetterie') }}">Retour à la billetterie</a> </button>
 
 
 

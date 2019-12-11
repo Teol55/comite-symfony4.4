@@ -182,7 +182,16 @@
           font-size: x-small;
 
         }
-
+        &__button{
+          height: 100px;
+          width: 100px;
+          position: fixed;
+          right: 0;
+          top: 50%;
+          z-index: 1;
+          margin: auto;
+          padding-top: 20px;
+        }
       }
 }
 .ticket__offer__card {
@@ -280,5 +289,11 @@
     }
 
   }
+  &__cart{
+    &__button {
+      display: none;
+    }
+  }
+  }
 
-}}
+}

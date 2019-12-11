@@ -13,6 +13,7 @@ use App\Entity\LigneRequest;
 use App\Entity\Request;
 use App\Entity\Ticket;
 use App\Entity\User;
+use App\Repository\RequestRepository;
 use App\Repository\TicketRepository;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\DBAL\Types\IntegerType;
@@ -20,12 +21,12 @@ use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
+use Symfony\Component\Intl\DateFormatter\DateFormat\MonthTransformer;
 
 
 class CartService extends AbstractController
 {
-    const SESSION_CART = 'cart';
+    const SESSION_CART = 'panier';
 
     /**
      * @var \Swift_Mailer
@@ -48,8 +49,12 @@ class CartService extends AbstractController
      * @var UserInterface
      */
     private $user;
+    /**
+     * @var RequestRepository
+     */
+    private $requestRepository;
 
-    public function __construct(\Swift_Mailer $swift_Mailer, ObjectManager $manager, SessionInterface $session,TicketRepository $ticketRepository)
+    public function __construct(\Swift_Mailer $swift_Mailer, ObjectManager $manager, SessionInterface $session,TicketRepository $ticketRepository,RequestRepository $requestRepository)
     {
 
         $this->swift_Mailer = $swift_Mailer;
@@ -58,39 +63,68 @@ class CartService extends AbstractController
 
         $this->ticketRepository = $ticketRepository;
 
+        $this->requestRepository = $requestRepository;
     }
 
     public function save(array $items,$total,User $user)
     {
-//        if($ticket->getCustomer()->getId()){
-//            $ticket->setCustomer($this->manager->merge($ticket->getCustomer()));
-//        }
-//
-//        $ticket->setCreatedAt(new \DateTime());
-//        $ticket->setReference($ticket->getCreatedAt()->getTimestamp() . $ticket->getCustomer()->getStripeCustomerId());
 
-    $commande=new Request();
-    foreach ($items as $item)
+   $panier=$this->getCurrentCart();
+//  données de mon panier premier screen dd($panier);
+//  je récupére mes données de mon panier pour créer ma commande
+    $order=new Request();
+    $order->setPrice($total);
+    $order->setUser($user);
+    $order->setCreatedAt(new \DateTime());
+
+   $this->manager->persist($order);
+   $this->manager->flush();
+// Die aprés l'enregistrement qui est bien créé dd($order);
+
+
+//je récupére les différentes lignes de mon panier pour les passer à ma commande
+    foreach ($panier->getLigneRequest() as $ligneRequest)
     {
-        $ligne=new LigneRequest();
-        $ligne->setTicket($item['ticket']);
-        $ligne->setNbTicket($item['quantity']);
-        $ligne->setPrice($item['ticket']->getPriceCe() * $item['quantity']);
+
+       //pour décomposer j'ai fait  une methode pour enregistrer les lignes de ma commande
+        $ligne=$this->saveLigneRequest($ligneRequest->getTicket(),$ligneRequest->getNbTicket(),$order);
         $this->manager->persist($ligne);
-        $commande->addLigneRequest($ligne);
+        $order->addLigneRequest($ligne);
+
+
     }
-    $commande->setPrice($total);
-    $commande->setCreatedAt(new \DateTime());
-$commande->setUser($user);
+        $this->manager->persist($order);
+//dd($order);
+$this->manager->flush();
 
-        $this->manager->persist($commande);
-        $this->manager->flush();
 
-        return $commande;
+
+
+
+        return $order;
     }
+public function saveLigneRequest(Ticket $id,int $nbTicket,$order) :LigneRequest
+{
 
+    $ligne= new LigneRequest();
+    $ticket=$this->manager->getRepository(Ticket::class)->findOneBy(
+        ['id' => $id->getId()]
+    );
+
+    $ligne->setNbTicket($nbTicket);
+    $ligne->setTicket($ticket);
+    $ligne->setRequest($order);
+    $ligne->setPrice($nbTicket * $id->getPriceCE());
+    $this->manager->persist($ligne);
+    $this->manager->flush();
+//     die troisieme captrue dd($ligne);
+
+    return $ligne;
+
+}
     public function sendMessage(Request $commande)
     {
+
         $message = (new \Swift_Message('Confirmation de Commande'))
             ->SetFrom('m.ch@atipicwebdesign.fr')
             ->setTo($commande->getUser()->getEmail())
@@ -107,25 +141,27 @@ $commande->setUser($user);
     }
 
     /**
-     * @return Ticket
+     * @return Request
      */
-    public function getCurrentTicket()
-    {
-//        $ticket = $this->session->get(TicketManager::SESSION_TICKET);
-//        if(!$ticket instanceof  Ticket){
-//            throw new NotFoundHttpException();
-//        }
-//        return $ticket;
+    public function getCurrentCart()
+    { $this->initializeCart();
+        $cart = $this->session->get(CartService::SESSION_CART);
+        if(!$cart instanceof Request){
+            throw new NotFoundHttpException();
+        }
+        return $cart;
     }
 
     /**
      * @return Request
      */
-    public function initializeTicket()
+    public function initializeCart()
     {
+        if(!$this->session->get(CartService::SESSION_CART)){
         $cart = new Request();
         $this->session->set(CartService::SESSION_CART, $cart);
-        return $cart;
+        return $cart;}
+
     }
     public function closeCart()
     {
@@ -145,29 +181,44 @@ $commande->setUser($user);
         $this->swift_Mailer->send($message);
 
     }
-    public function addItem(int $id,int $nbTicket)
+    public function addItem(Ticket $id,int $nbTicket) :LigneRequest
     {
-        $panier=$this->session->get('panier',[]);
-        $panier[$id]=$nbTicket;
-        $this->session->set('panier',$panier);
+
+        $ligne= new LigneRequest();
+        $ligne->setNbTicket($nbTicket);
+        $ligne->setTicket($id);
+
+        $ligne->setPrice($nbTicket * $id->getPriceCE());
+        $this->manager->persist($ligne);
+//        Si j'enregistre ici j'arrive à mettre ma ligne avec le ticket
+//        $this->manager->flush();
+//        dd($ligne);
+
+        return $ligne;
+
 
     }
     public function removeItem(int $id){
-        $panier=$this->session->get('panier',[]);
-        if(!empty($panier[$id])){
-            unset($panier[$id]);
+
+        $panier=$this->getCurrentCart();
+        $ligne=$panier->getLigneRequest()[$id];
+
+
+        if(!empty($panier->getLigneRequest()[$id])){
+            unset($panier->getLigneRequest()[$id]);
             $this->session->set('panier',$panier);
         }
 
     }
     public function showItems(){
-        $panier=$this->session->get('panier',[]);
+        $panier=$this->getCurrentCart();
         $panierData=[];
 
-        foreach ($panier as $id => $quantity){
+        foreach ($panier->getLigneRequest()  as $key => $item){
             $panierData[]=[
-                'ticket'=>$this->ticketRepository->find($id),
-                'quantity'=>$quantity
+                'ticket'=>$item->getTicket(),
+                'quantity'=>$item->getNbTicket(),
+                'key'=>$key
             ];
         }
         return $panierData;
@@ -181,6 +232,7 @@ $commande->setUser($user);
         }
         return $total;
     }
+
 
 
 }
