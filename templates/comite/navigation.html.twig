@@ -26,20 +26,22 @@
     <div class="menu__text col-md-6">
         <a href="{{ path('app_homepage') }}">Accueil</a>
         <a href="{{ path('app_tool') }}">Matériel</a>
-        <a href="{{ path('app_logout') }}">Se Déconnecter</a>
+        <a href="{{ path('app_billetterie') }}">Billetterie</a>
+        <a href="{{ path('app_partenaire') }}">Nos partenaires</a>
+        <a href="{{ path('app_logout') }}">Se déconnecter</a>
 
         {% if is_granted('ROLE_ADMIN_ARTICLE') %}
-            <a  href="{{ path('admin_article_new') }}">Admin</a>
+            <a  href="{{ path('admin_article_new') }}">Administration</a>
         {% endif %}
 
     </div>
         <div class="contact col-md-6">
                 <div class="contact__text">
-            <h1>Peut-on vous aider?</h1>
-             <p>CSE Essilor BAttants<br>
-                Bureau 113,<br>
-                 Ligny en Barrois</p>
-            <h2>Tél:06-01-02-03-04</h2>
+            <h1>Peut-on vous aider ?</h1>
+             <p>CSE Essilor Battants<br>
+                Chemin des Battants<br>
+                55500 Ligny en Barrois</p>
+            <h2>03-29-76-66-66</h2>
                 </div>
 {#                <div class="col-md-12">#}
 {#                    <button type="button" class="btn btn-link"><i class="fab fa-twitter fa-2x"></i></button>&nbsp;&nbsp;<button type="button" class="btn btn-link"><i class="fab fa-instagram fa-2x"></i></button>&nbsp;&nbsp;<button type="button" class="btn btn-link"><i class="fab fa-facebook-f fa-2x"></i></button>#}

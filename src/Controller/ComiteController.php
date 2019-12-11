@@ -162,7 +162,7 @@ class ComiteController extends AbstractController
     {
         $events= $repository->findAll();
         return $this->render('comite/event.html.twig', [
-            'title' => 'Evénements Battants',
+            'title' => 'évènements Battants',
             'events'=> $events ,
             'items'=>  $cart->showItems(),
             ]);
