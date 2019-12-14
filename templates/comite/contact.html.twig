@@ -1,20 +1,18 @@
 {% extends 'base.html.twig' %}
-{% block title %}{{ title }}{% endblock %}
+{% block title %}{{ title|upper }}{% endblock %}
 
 {% block body %}
 
     <div class="container">
         <div class="row justify-content-center site__title">
-            <h1>Contactez Nous !!!</h1>
+            <h1>CONTACTEZ NOUS !!!</h1>
         </div>
 
-        <div class="row tool__table">
+
 
 
                 {{ form_start(contactForm) }}
 
-               {{ form_row(contactForm.nameContact) }}
-                {{ form_row(contactForm.emailContact) }}
                 {{ form_row(contactForm.messageContact) }}
 
 
@@ -22,7 +20,7 @@
             <button type="submit" class="btn btn-primary">Envoyer</button>
             {{ form_end(contactForm) }}
 
-        </div>
+
     </div>
 
 {% endblock %}

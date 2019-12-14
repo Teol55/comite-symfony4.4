@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 
 /**
@@ -98,7 +99,7 @@ class ComiteController extends AbstractController
     /**
      * @Route("/contact", name="app_contact")
      */
-    public function contact(Request $request,\Swift_Mailer $swift_Mailer,CartService $cart)
+    public function contact(Request $request,\Swift_Mailer $swift_Mailer,CartService $cart,UserInterface $user)
     {
 
 
@@ -112,12 +113,13 @@ class ComiteController extends AbstractController
 
 
                 $message = (new \Swift_Message('Confirmation de Commande'))
-                    ->SetFrom($formMessage["emailContact"])
+                    ->SetFrom($user->getEmail())
                     ->setTo('m.ch5500@gmail.com')
                     ->setBody($this->renderView('comite/emailContact.html.twig',
                         ['message' => $formMessage['messageContact'],
-                            'nom'=>$formMessage['nameContact'],
-                            'email'=>$formMessage['emailContact']
+                            'nom'=>$user->getForname(),
+                            'prenom'=>$user->getsurName(),
+                            'email'=>$user->getEmail()
                         ]), 'text/html');
                 $swift_Mailer->send($message);
 
