@@ -32,6 +32,7 @@ class TicketFormType extends AbstractType
             ])
             ->add('url',UrlType::class,[
                 'label'=> 'Url du site:',
+                'required' => false
 
             ])
         ;

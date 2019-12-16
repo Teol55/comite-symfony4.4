@@ -1,3 +1,4 @@
+// import pdfjsLib from 'pdfjs-dist/webpack';
 import '../css/layout/_pvce.scss';
 (function() {
     let currentPageIndex = 0;

@@ -39,10 +39,12 @@ class UserFormType extends AbstractType
         'choices'=>['Syndicat C.G.T'=>'cgt','Syndicat C.F.E-C.G.C'=> 'cfe','Sans Etiquettes'=>'sans']])
 
             ->add('phoneNumber',TelType::class,[
-        'label'=>"Numéro de téléphone"])
+        'label'=>"Numéro de téléphone:",
+                'required' => false])
 
             ->add('smartphone',TelType::class,[
-                'label'=>"Numéro de portable"]);
+                'label'=>"Numéro de portable:",
+                'required' => false]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
