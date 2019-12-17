@@ -7,13 +7,14 @@
         <div class="row justify-content-center site__title">
             <h1>{{ title|upper }}</h1>
         </div>
-
+        <div class="responsive-table-line" style="margin:0px auto;max-width:600px;">
         <div class="row tool__table">
             <caption>
                 <h4>Membres CSE adhérant à la  CGT
                 </h4>
             </caption>
-            <table class="table table-striped">
+
+            <table class="table table-striped   ">
                 <thead class="thead-dark">
                 <tr>
                     <th scope="col">Noms</th>
@@ -37,13 +38,15 @@
             {% endfor %}
                 </tbody>
             </table>
+            </div>
         </div>
-
+        <div class="responsive-table-line" style="margin:0px auto;max-width:600px;">
             <div class="row tool__table">
                 <caption>
                     <h4>Membres CSE adhérant à la CFE-CGC
                     </h4>
                 </caption>
+
                 <table class="table table-striped">
                     <thead class="thead-dark">
                     <tr>
@@ -67,13 +70,15 @@
                         </tr>
                     {% endfor %}
                     </tbody>
-                </table>
+                </table></div>
         </div>
+        <div class="responsive-table-line" style="margin:0px auto;max-width:600px;">
         <div class="row tool__table">
             <caption>
                 <h4>Membres CSE Sans Etiquette
                 </h4>
             </caption>
+
             <table class="table table-striped">
                 <thead class="thead-dark">
                 <tr>
@@ -98,6 +103,7 @@
                 {% endfor %}
                 </tbody>
             </table>
+            </div>
         </div>
     </div>
 
