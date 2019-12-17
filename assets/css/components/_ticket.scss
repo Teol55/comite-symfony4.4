@@ -263,7 +263,7 @@
           }
        &__button{
          position: absolute;
-         top: 70%;
+         top: 65%;
          right: 20px;
        }
         }
@@ -288,10 +288,18 @@
       margin: 0;
     }
 
+
   }
   &__cart{
     &__button {
       display: none;
+    }
+  }
+  &__cardBox{
+    &__redirection{
+      position: absolute;
+      bottom: 20%;
+      left: 20px;
     }
   }
   }
