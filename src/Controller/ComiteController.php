@@ -114,7 +114,7 @@ class ComiteController extends AbstractController
 
                 $message = (new \Swift_Message('Confirmation de Commande'))
                     ->SetFrom($user->getEmail())
-                    ->setTo('m.ch5500@gmail.com')
+                    ->setTo('m.ch55000@gmail.com')
                     ->setBody($this->renderView('comite/emailContact.html.twig',
                         ['message' => $formMessage['messageContact'],
                             'nom'=>$user->getForname(),
