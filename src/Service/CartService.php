@@ -126,7 +126,7 @@ public function saveLigneRequest(Ticket $id,int $nbTicket,$order) :LigneRequest
     {
 
         $message = (new \Swift_Message('Confirmation de Commande'))
-            ->SetFrom($commande->getUser()->getEmail())
+            ->SetFrom('csebattants@csebattants.fr')
             ->setTo('m.ch55000@gmail.com')
             ->setBody($this->renderView('comite/email.html.twig',
                 ['commande' => $commande]), 'text/html');
