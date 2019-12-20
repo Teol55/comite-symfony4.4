@@ -183,19 +183,17 @@ public function saveLigneRequest(Ticket $id,int $nbTicket,$order) :LigneRequest
     }
     public function addItem(Ticket $id,int $nbTicket) :LigneRequest
     {
+             if($nbTicket>0) {
+                $ligne = new LigneRequest();
+                $ligne->setNbTicket($nbTicket);
+                $ligne->setTicket($id);
 
-        $ligne= new LigneRequest();
-        $ligne->setNbTicket($nbTicket);
-        $ligne->setTicket($id);
+                $ligne->setPrice($nbTicket * $id->getPriceCE());
+                $this->manager->persist($ligne);
 
-        $ligne->setPrice($nbTicket * $id->getPriceCE());
-        $this->manager->persist($ligne);
-//        Si j'enregistre ici j'arrive à mettre ma ligne avec le ticket
-//        $this->manager->flush();
-//        dd($ligne);
 
-        return $ligne;
-
+                return $ligne;
+             }
 
     }
     public function removeItem(int $id){

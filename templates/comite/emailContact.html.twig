@@ -1,20 +1,30 @@
-{% block subject 'Welcome to newsletter, ' %}
+<!doctype html>
+<html lang="fr">
+<head>
 
-{% block body_html %}
-    This is the <strong>HTML body</strong>.
-{% endblock %}
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Message </title>
 
-{% block body_text %}
+    <style type="text/css">
+        body {
+            background-color:#3498db;
+            color:black;
+        }
+
+    </style>
+
+    {% block body_text %}
 
     <div class="container">
     <div class="row justify-content-center site__title">
-        <h1>{{nom }} {{prenom}}</h1>
+        <h1>Message de {{nom }} {{prenom}}</h1>
     </div>
     <div>
         {{ message }}
 
 
-        {{ email }}
     </div>
 
 {% endblock %}
