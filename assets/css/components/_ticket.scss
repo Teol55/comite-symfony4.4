@@ -243,7 +243,7 @@
        display: block;
           //width: calc(100% - 50px);
           padding: 48px 25px 55px;
-          height: 520px;
+          height: 620px;
           clip-path: polygon(0 0,100% 0,100% 93%,0 98%);
           -webkit-clip-path: polygon(0 0,100% 0,100% 93%,0 98%);
           min-height: calc(100% - 20px);
@@ -298,7 +298,7 @@
   &__cardBox{
     &__redirection{
       position: absolute;
-      bottom: 20%;
+      top: 75%;
       left: 20px;
     }
   }

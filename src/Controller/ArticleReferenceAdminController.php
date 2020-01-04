@@ -35,7 +35,7 @@ class ArticleReferenceAdminController extends AbstractController
             [
             new NotBlank(),
             new File([
-                'maxSize' => '5M',
+                'maxSize' => '15M',
                 'mimeTypes' => [
                     'image/*',
                     'application/pdf',
