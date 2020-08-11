@@ -29,6 +29,6 @@
         "font-awesome": "^4.7.0",
         "particles.js": "^2.0.0",
         "pdfjs-dist": "^2.2.228",
-        "tinymce": "^5.1.1"
+        "tinymce": "^5.4.0"
     }
 }
